@@ -15,3 +15,4 @@ from my_project.auth.domain.orders.sensor_developer import SensorDeveloper
 from my_project.auth.domain.orders.shop import Shop
 from my_project.auth.domain.orders.webcam import Webcam
 from my_project.auth.domain.orders.webcam_developer import WebCamDeveloper
+from my_project.auth.domain.orders.child import Child

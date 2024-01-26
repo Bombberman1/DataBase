@@ -44,3 +44,8 @@ def patch_buyer(buyer_id: int) -> Response:
 def delete_buyer(buyer_id: int) -> Response:
     buyer_controller.delete(buyer_id)
     return make_response("Buyer deleted", HTTPStatus.OK)
+
+
+@buyer_bp.get('/age/<int:target_age>')
+def find_buyers_by_age(target_age: int) -> Response:
+    return make_response(jsonify(buyer_controller.find_buyers_by_age(target_age)), HTTPStatus.OK)

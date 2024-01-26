@@ -1,3 +1,4 @@
+from datetime import datetime
 from http import HTTPStatus
 from flask import Blueprint, Response, jsonify, request, make_response
 
@@ -44,3 +45,39 @@ def patch_purchase(purchase_id: int) -> Response:
 def delete_purchase(purchase_id: int) -> Response:
     purchase_controller.delete(purchase_id)
     return make_response("Purchase deleted", HTTPStatus.OK)
+
+
+@purchase_bp.get('/buyer/<int:purchase_id>')
+def get_buyer_of_purchase(purchase_id: int) -> Response:
+    return make_response(jsonify(purchase_controller.find_buyer(purchase_id)), HTTPStatus.OK)
+
+
+@purchase_bp.get('/robopatrol/<int:purchase_id>')
+def get_robopatrol_of_purchase(purchase_id: int) -> Response:
+    return make_response(jsonify(purchase_controller.find_robopatrol(purchase_id)), HTTPStatus.OK)
+
+
+@purchase_bp.get('/shop/<int:purchase_id>')
+def get_shop_of_purchase(purchase_id: int) -> Response:
+    return make_response(jsonify(purchase_controller.find_shop(purchase_id)), HTTPStatus.OK)
+
+
+@purchase_bp.get('/by-date/<string:target_date>')
+def get_purchases_by_date(target_date: str) -> Response:
+    target_date = datetime.strptime(target_date, '%Y-%m-%d')
+    return make_response(jsonify(purchase_controller.find_purchases_by_date(target_date)), HTTPStatus.OK)
+
+
+@purchase_bp.get('/by-buyer/<int:buyer_id>')
+def get_purchases_by_buyer_id(buyer_id: int) -> Response:
+    return make_response(jsonify(purchase_controller.find_purchases_by_buyer_id(buyer_id)), HTTPStatus.OK)
+
+
+@purchase_bp.get('/by-shop/<int:shop_id>')
+def get_purchases_by_shop_id(shop_id: int) -> Response:
+    return make_response(jsonify(purchase_controller.find_purchases_by_shop_id(shop_id)), HTTPStatus.OK)
+
+
+@purchase_bp.get('/by-product/<int:product_id>')
+def get_purchases_by_product_id(product_id: int) -> Response:
+    return make_response(jsonify(purchase_controller.find_purchases_by_product_id(product_id)), HTTPStatus.OK)

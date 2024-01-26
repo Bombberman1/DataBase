@@ -44,3 +44,13 @@ def patch_sensor(sensor_id: int) -> Response:
 def delete_sensor(sensor_id: int) -> Response:
     sensor_controller.delete(sensor_id)
     return make_response("Sensor deleted", HTTPStatus.OK)
+
+
+@sensor_bp.get('/developer/<int:sensor_id>')
+def get_sensor_developer(sensor_id: int) -> Response:
+    return make_response(jsonify(sensor_controller.find_sensor_developer(sensor_id)), HTTPStatus.OK)
+
+
+@sensor_bp.get('/developer/sensors/<int:developer_id>')
+def get_sensors_by_developer(developer_id: int) -> Response:
+    return make_response(jsonify(sensor_controller.find_sensors_by_developer_id(developer_id)), HTTPStatus.OK)

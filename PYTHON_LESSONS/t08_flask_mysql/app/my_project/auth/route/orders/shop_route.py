@@ -44,3 +44,8 @@ def patch_shop(shop_id: int) -> Response:
 def delete_shop(shop_id: int) -> Response:
     shop_controller.delete(shop_id)
     return make_response("Shop deleted", HTTPStatus.OK)
+
+
+@shop_bp.get('/product/<int:product_id>')
+def get_shops_by_product_id(product_id: int) -> Response:
+    return make_response(jsonify(shop_controller.find_shops_by_product_id(product_id)), HTTPStatus.OK)

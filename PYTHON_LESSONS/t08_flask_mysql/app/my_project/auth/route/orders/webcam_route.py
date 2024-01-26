@@ -45,3 +45,12 @@ def delete_webcam(webcam_id: int) -> Response:
     webcam_controller.delete(webcam_id)
     return make_response("Webcam deleted", HTTPStatus.OK)
 
+
+@webcam_bp.get('/developer/<int:webcam_id>')
+def get_webcam_developer(webcam_id: int) -> Response:
+    return make_response(jsonify(webcam_controller.find_developer(webcam_id)), HTTPStatus.OK)
+
+
+@webcam_bp.get('/developer/cameras/<int:developer_id>')
+def get_cameras_by_developer_id(developer_id: int) -> Response:
+    return make_response(jsonify(webcam_controller.find_cameras_by_developer_id(developer_id)), HTTPStatus.OK)

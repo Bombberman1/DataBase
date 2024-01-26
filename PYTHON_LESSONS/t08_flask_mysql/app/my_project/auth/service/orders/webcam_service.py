@@ -7,3 +7,6 @@ class WebcamService(GeneralService):
 
     def find_developer(self, webcam_id: int):
         return self._dao.find_developer(webcam_id)
+
+    def find_cameras_by_developer_id(self, developer_id: int):
+        return self._dao.find_cameras_by_developer_id(developer_id)
